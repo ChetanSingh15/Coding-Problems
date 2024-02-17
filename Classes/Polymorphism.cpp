@@ -49,12 +49,7 @@ class Dog: public Animal {
         cout<<"Dog Barking"<<endl;
     }
 };
-class Kutta: public Dog {
-    public:
-    void speak(){
-        cout<<"Kutta Barking"<<endl;
-    }
-};
+
 
 int main(){
 
@@ -62,11 +57,6 @@ int main(){
     Dog D;
 
     D.speak();
-
-
-
-
-
 
 
    /* B obj1 , obj2;
