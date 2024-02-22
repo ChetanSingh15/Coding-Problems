@@ -14,6 +14,15 @@ class Node{
         this -> prev = NULL;
         this -> next = NULL;
     }
+
+    ~Node(){
+        int val = this -> data;
+        if(next != NULL){
+            delete next;
+            next = NULL;
+        }
+        cout<<"Memory free for node with data "<<val<<endl;
+    }
 };
 
 // Traversing  a Linked list
@@ -101,6 +110,35 @@ void insertAtPosition(Node* &tail, Node* &head,int position, int d){
 
 }
 
+void deleteNode(int position,Node* &head){
+
+    // deleting first or start node
+    if(position == 1){
+        Node* temp = head;
+        temp -> next -> prev = NULL;
+        head = temp -> next;
+        temp -> next = NULL;
+        delete temp;
+    }
+    else{
+        // deleting any middle or last node
+        Node* curr = head;
+        Node* prev = NULL;
+        int cnt = 1;
+        while(cnt < position){
+            prev = curr;
+            curr = curr -> next;
+            cnt++;
+        }
+
+        curr -> prev = NULL;
+        prev -> next = curr -> next;
+        curr -> next = NULL;
+
+        delete curr;
+    }
+}
+
 int main(){
 
     // Node* node1 = new Node(10);
@@ -113,41 +151,50 @@ int main(){
     insertAtHead(tail,head,11);
     print(head);
 
-    cout<<"Head "<<head -> data<<endl;
-    cout<<"Tail "<<tail -> data <<endl;
+    // cout<<"Head "<<head -> data<<endl;
+    // cout<<"Tail "<<tail -> data <<endl;
 
     insertAtHead(tail,head,18);
     print(head);
 
-    cout<<"Head "<<head -> data<<endl;
-    cout<<"Tail "<<tail -> data <<endl;
+    // cout<<"Head "<<head -> data<<endl;
+    // cout<<"Tail "<<tail -> data <<endl;
 
     insertAtHead(tail,head,9);
     print(head);
 
-    cout<<"Head "<<head -> data<<endl;
-    cout<<"Tail "<<tail -> data <<endl;
+    // cout<<"Head "<<head -> data<<endl;
+    // cout<<"Tail "<<tail -> data <<endl;
 
     insertAtTail(tail,head, 25);
     print(head);
 
-    cout<<"Head "<<head -> data<<endl;
-    cout<<"Tail "<<tail -> data <<endl;
+    // cout<<"Head "<<head -> data<<endl;
+    // cout<<"Tail "<<tail -> data <<endl;
 
     insertAtPosition(tail,head,2,100);
     print(head);
 
-    cout<<"Head "<<head -> data<<endl;
-    cout<<"Tail "<<tail -> data <<endl;
+    // cout<<"Head "<<head -> data<<endl;
+    // cout<<"Tail "<<tail -> data <<endl;
 
     insertAtPosition(tail,head,1,101);
     print(head);
 
-    cout<<"Head "<<head -> data<<endl;
-    cout<<"Tail "<<tail -> data <<endl;
+    // cout<<"Head "<<head -> data<<endl;
+    // cout<<"Tail "<<tail -> data <<endl;
 
     insertAtPosition(tail,head,7,115);
     print(head);
+
+    cout<<"Head "<<head -> data<<endl;
+    cout<<"Tail "<<tail -> data <<endl;
+
+    deleteNode(7,head);
+    print(head);
+
+    // cout<<"Head "<<head -> data<<endl;
+    // cout<<"Tail "<<tail -> data <<endl;  Khud ko karna h ye case sahi
 
     return 0;
 }
